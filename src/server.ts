@@ -1,7 +1,7 @@
 import { App } from "./app";
 
 const app = new App({
-  port: 80
+  port: 8080
 });
 
 app.listen();
