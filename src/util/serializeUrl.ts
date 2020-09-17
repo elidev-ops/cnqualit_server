@@ -4,7 +4,7 @@ export default function serializeUrl(data: Product[]) {
   const SerializedProducts = data.map(product => {
     return {
       ...product,
-      image: `http://localhost:3001/uploads/${product.image}`
+      image: `https://api-cnquality-com-br.umbler.net/uploads/${product.image}`
     }
   });
   return SerializedProducts;
