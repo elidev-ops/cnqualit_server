@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { Request, Response, request } from 'express';
 
 import { CreateProductUseCase } from "./CreateProductUseCase";
 
@@ -8,7 +8,8 @@ class CreateProductController {
   ) {}
 
   async create(request: Request, response: Response) {
-    await this.ProductUseCase.execute().save(request.body);
+    const image = request.file;
+    await this.ProductUseCase.execute().save({...request.body, image: request.file.filename});
 
     return response.status(201).send();
   }
@@ -29,10 +30,14 @@ class CreateProductController {
 
   async update(request: Request, response: Response) {
     const { id } = request.params;
-  
-    const products = await this.ProductUseCase.execute().update(Number(id), request.body);
+    console.log(request.file)
+    const products = 
+      await this.ProductUseCase.execute()
+        .update(Number(id), 
+          request.file ? {...request.body, image: request.file.filename} 
+          : request.body);
 
-    return response.status(200).json(products);
+    return response.status(200).json('hello');
   }
 
   async delete(request: Request, response: Response) {

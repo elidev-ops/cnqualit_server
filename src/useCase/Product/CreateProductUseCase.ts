@@ -9,7 +9,7 @@ class CreateProductUseCase {
 
   execute() {
     const save = async (data: ICreateProductRequestDTO) => {
-      const product = new Product({...data, image: encodeURIComponent(data.image)});
+      const product = new Product(data);
 
       await this.ProductRepository.save(product);
     }
